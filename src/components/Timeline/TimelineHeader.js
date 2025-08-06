@@ -20,12 +20,14 @@ const TimelineHeader = ({ timelineMarkers, zoomLevel }) => {
           {/* Simplified timeline line */}
           <div className="absolute w-px h-full bg-slate-300 group-hover:bg-blue-400 transition-colors duration-200"></div>
           
-          {/* Clean date label */}
-          <div className="relative bg-white px-3 py-1 rounded-md border border-slate-200 shadow-sm group-hover:border-blue-300 group-hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-medium text-slate-600 whitespace-nowrap group-hover:text-blue-600 transition-colors duration-200">
-              {formatDate(marker.date)}
+          {/* Clean date label - hide content for first marker */}
+          {index !== 0 && (
+            <div className="relative bg-white px-3 py-1 rounded-md border border-slate-200 shadow-sm group-hover:border-blue-300 group-hover:shadow-md transition-all duration-200">
+              <div className="text-xs font-medium text-slate-600 whitespace-nowrap group-hover:text-blue-600 transition-colors duration-200">
+                {formatDate(marker.date)}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       ))}
     </div>
