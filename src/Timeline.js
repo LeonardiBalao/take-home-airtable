@@ -62,6 +62,49 @@ const Timeline = ({ items }) => {
     document.body.style.cursor = '';
   };
 
+  const handleWheel = (e) => {
+    // Completely prevent default behavior and stop propagation
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only zoom when scrolling vertically (deltaY) and not horizontally scrolling
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      const zoomDirection = e.deltaY > 0 ? -1 : 1; // Negative deltaY = zoom in, positive = zoom out
+      const zoomStep = 0.1; // TIMELINE_CONFIG.ZOOM_STEP
+      const zoomMin = 1;    // TIMELINE_CONFIG.ZOOM_MIN
+      const zoomMax = 2;    // TIMELINE_CONFIG.ZOOM_MAX
+      
+      const newZoomLevel = Math.min(
+        zoomMax,
+        Math.max(zoomMin, zoomLevel + (zoomDirection * zoomStep))
+      );
+      
+      if (newZoomLevel !== zoomLevel) {
+        // Preserve scroll position relative to zoom
+        const container = scrollContainerRef.current;
+        if (container) {
+          const scrollRatio = container.scrollLeft / Math.max(1, container.scrollWidth - container.clientWidth);
+          
+          handleZoomChange(newZoomLevel);
+          
+          // Restore scroll position after zoom
+          setTimeout(() => {
+            if (container) {
+              const newScrollLeft = scrollRatio * (container.scrollWidth - container.clientWidth);
+              container.scrollLeft = newScrollLeft;
+            }
+          }, 0);
+        }
+      }
+    } else {
+      // For horizontal scrolling (deltaX), allow horizontal timeline scrolling
+      const container = scrollContainerRef.current;
+      if (container) {
+        container.scrollLeft += e.deltaX;
+      }
+    }
+  };
+
   // Add global mouse event listeners
   useEffect(() => {
     if (isDragging) {
@@ -74,6 +117,24 @@ const Timeline = ({ items }) => {
       };
     }
   }, [isDragging, dragStart]);
+
+  // Add wheel event listener to ensure proper event handling
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const wheelHandler = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleWheel(e);
+      };
+      
+      container.addEventListener('wheel', wheelHandler, { passive: false });
+      
+      return () => {
+        container.removeEventListener('wheel', wheelHandler);
+      };
+    }
+  }, [zoomLevel, handleZoomChange]);
 
   return (
     <div className="w-full p-3 sm:p-6">
