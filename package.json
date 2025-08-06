@@ -6,10 +6,18 @@
     "start": "parcel src/index.html --open"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.536.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "parcel": "^2.0.0"
+    "@tailwindcss/postcss": "^4.1.11",
+    "autoprefixer": "^10.4.21",
+    "parcel": "^2.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
   }
 }
