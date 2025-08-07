@@ -12,6 +12,7 @@ const Timeline = ({ items }) => {
   const {
     zoomLevel,
     editingItem,
+    isMobile,
     handleStartEdit,
     handleSaveEdit,
     handleCancelEdit,
@@ -144,6 +145,7 @@ const Timeline = ({ items }) => {
           laneCount={lanes.length}
           zoomLevel={zoomLevel}
           onZoomChange={handleZoomChange}
+          isMobile={isMobile}
         />
 
         {/* Timeline container */}
@@ -157,6 +159,7 @@ const Timeline = ({ items }) => {
             <TimelineHeader 
               timelineMarkers={timelineMarkers} 
               zoomLevel={zoomLevel}
+              isMobile={isMobile}
             />
             
             <TimelineLanes
