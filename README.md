@@ -20,8 +20,6 @@ I'm particularly happy with a few aspects of this timeline component:
 
 **Mobile-First Approach**: The responsive design wasn't an afterthought. I implemented mobile detection and conditional rendering that provides a genuinely different experience on mobile devices rather than just scaling down the desktop version. The fixed 200% zoom on mobile and selective hiding of zoom controls creates a much cleaner mobile experience.
 
-**Hover Expansion Feature**: This was a breakthrough moment in the development. Instead of cramming all information into small timeline bars, the hover expansion cards provide full context without cluttering the interface. The boundary detection ensures cards stay visible even when hovering near screen edges.
-
 **Lane Assignment Algorithm**: The efficient lane packing algorithm ensures items that don't overlap in time share lanes, maximizing screen real estate. I enhanced the provided algorithm to handle edge cases and ensure consistent visual spacing.
 
 **Smooth User Experience**: Every interaction feels polished - from the mouse wheel zoom to the inline editing to the hover transitions. These details make the tool feel professional rather than just functional.
@@ -41,8 +39,6 @@ I'm particularly happy with a few aspects of this timeline component:
 **Visual Design**: I drew heavy inspiration from project management tools like Monday.com and Asana's timeline views. Their use of color coding, clean spacing, and hover interactions influenced my design direction.
 
 **Mobile Experience**: The decision to fix mobile zoom at 200% came from testing various zoom levels and realizing that mobile users needed a completely different interaction paradigm. Touch interfaces work better with larger targets and simpler controls.
-
-**Hover vs Click Interactions**: I debated between click-to-expand and hover-to-expand for showing full item details. I chose hover because it felt more natural for desktop users and reduced the number of clicks needed to browse timeline content.
 
 **Component Structure**: I organized components by domain (Timeline/, Layout/) rather than by type (components/, containers/). This made it easier to locate related functionality and would scale better as the application grows.
 
@@ -73,11 +69,6 @@ I'm particularly happy with a few aspects of this timeline component:
 - Hover expansion behavior and boundary detection
 - Inline editing flow from start to finish
 - Responsive behavior at different screen sizes
-
-**Visual Regression Testing**: Tools like Chromatic or Percy to catch:
-- Unintended visual changes during development
-- Responsive design breakpoints
-- Hover state appearances across different browsers
 
 **Performance Testing**: I'd implement:
 - Bundle size analysis to ensure optimal loading
@@ -120,5 +111,6 @@ Modern browsers supporting ES6+ features:
 - Firefox 88+
 - Safari 14+
 - Edge 90+
+
 
 
