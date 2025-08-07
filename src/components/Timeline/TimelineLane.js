@@ -14,7 +14,7 @@ const TimelineLane = ({
   return (
     <div
       className={cn(
-        "relative h-16 border-b border-gray-100",
+        "relative h-16 border-b border-gray-100 overflow-hidden",
         laneIndex % 2 === 0 ? "bg-white" : "bg-gray-50"
       )}
     >

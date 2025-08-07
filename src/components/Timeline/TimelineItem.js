@@ -18,8 +18,10 @@ const TimelineItem = ({
     onSaveEdit(item.id, newName);
   };
 
-  const shouldAbbreviate = false; // Always show full text
-  const displayText = item.name; // Never truncate text
+  const shouldAbbreviate = parseFloat(position.width) < 8; // Smart abbreviation based on available space
+  const displayText = shouldAbbreviate && item.name.length > 10
+    ? `${item.name.substring(0, Math.max(3, Math.floor(parseFloat(position.width) * 1.2)))}...`
+    : item.name; // Dynamic truncation based on item width
 
   return (
     <div
@@ -27,7 +29,7 @@ const TimelineItem = ({
       style={position}
     >
       <div className={cn(
-        "h-full rounded-xl border shadow-sm transition-all duration-300 relative",
+        "h-full rounded-xl border shadow-sm transition-all duration-300 overflow-hidden relative",
         "bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50",
         "border-blue-200/50 hover:border-blue-300",
         "hover:shadow-lg hover:shadow-blue-200/30 active:shadow-lg",
@@ -58,7 +60,7 @@ const TimelineItem = ({
                 "font-medium select-none leading-tight transition-colors duration-300",
                 "text-slate-700 group-hover:text-slate-800",
                 "text-xs sm:text-sm", // Consistent text size for all items
-                "whitespace-nowrap relative" // Removed overflow-hidden to show full text
+                "whitespace-nowrap overflow-hidden text-ellipsis relative" // Restore overflow control with ellipsis
               )}
               onDoubleClick={() => onStartEdit(item.id)}
               onTouchEnd={(e) => {

@@ -12,7 +12,7 @@ const TimelineLanes = ({
 }) => {
   return (
     <div 
-      className="relative min-w-full"
+      className="relative min-w-full overflow-hidden"
       style={{ 
         width: `${100 * zoomLevel}%`,
         minWidth: '100%'
