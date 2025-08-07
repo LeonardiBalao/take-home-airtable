@@ -18,10 +18,14 @@ const TimelineItem = ({
     onSaveEdit(item.id, newName);
   };
 
-  const shouldAbbreviate = parseFloat(position.width) < 8; // Smart abbreviation based on available space
-  const displayText = shouldAbbreviate && item.name.length > 10
-    ? `${item.name.substring(0, Math.max(3, Math.floor(parseFloat(position.width) * 1.2)))}...`
-    : item.name; // Dynamic truncation based on item width
+  // Only truncate if the item would extend beyond the timeline boundary
+  const itemRight = parseFloat(position.left) + parseFloat(position.width);
+  const wouldOverflow = itemRight > 98; // Allow 2% margin from edge
+  
+  const shouldAbbreviate = wouldOverflow && item.name.length > 10;
+  const displayText = shouldAbbreviate
+    ? `${item.name.substring(0, Math.max(5, Math.floor(item.name.length * 0.6)))}...`
+    : item.name; // Show full text unless it would overflow the timeline
 
   return (
     <div

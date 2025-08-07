@@ -5,15 +5,15 @@ export const calculateItemPosition = (item, dateRange) => {
   const left = ((itemStart - dateRange.start) / dateRange.total) * 100;
   const durationWidth = ((itemEnd - itemStart) / dateRange.total) * 100;
   
-  const textWidth = Math.max(item.name.length * 0.6, 6); // More reasonable multiplier
-  const minWidthForText = Math.min(textWidth, 20); // Reduced max width to prevent overflow
+  const textWidth = Math.max(item.name.length * 0.7, 8); // More generous for full text display
+  const minWidthForText = Math.min(textWidth, 25); // Allow wider items for better text display
   
-  const absoluteMinimum = durationWidth < 1 ? 3 : 4; // Reasonable minimum sizes
+  const absoluteMinimum = durationWidth < 1 ? 4 : 5; // Good minimum sizes
   
   const width = Math.max(durationWidth, minWidthForText, absoluteMinimum);
   
-  // Ensure item doesn't extend beyond 100% of timeline
-  const maxAllowedWidth = Math.min(width, 100 - left);
+  // Only constrain width if it would extend beyond timeline (leave 2% margin)
+  const finalWidth = left + width > 98 ? Math.max(4, 98 - left) : width;
   
-  return { left: `${left}%`, width: `${maxAllowedWidth}%` };
+  return { left: `${left}%`, width: `${finalWidth}%` };
 };
