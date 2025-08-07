@@ -18,10 +18,8 @@ const TimelineItem = ({
     onSaveEdit(item.id, newName);
   };
 
-  const shouldAbbreviate = parseFloat(position.width) < 6;
-  const displayText = shouldAbbreviate && item.name.length > 12
-    ? `${item.name.substring(0, 9)}...`
-    : item.name;
+  const shouldAbbreviate = false; // Always show full text
+  const displayText = item.name; // Never truncate text
 
   return (
     <div
@@ -29,7 +27,7 @@ const TimelineItem = ({
       style={position}
     >
       <div className={cn(
-        "h-full rounded-xl border shadow-sm transition-all duration-300 overflow-hidden relative",
+        "h-full rounded-xl border shadow-sm transition-all duration-300 relative",
         "bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50",
         "border-blue-200/50 hover:border-blue-300",
         "hover:shadow-lg hover:shadow-blue-200/30 active:shadow-lg",
@@ -59,8 +57,8 @@ const TimelineItem = ({
               className={cn(
                 "font-medium select-none leading-tight transition-colors duration-300",
                 "text-slate-700 group-hover:text-slate-800",
-                shouldAbbreviate ? "text-xs" : "text-xs sm:text-sm",
-                "whitespace-nowrap overflow-hidden relative"
+                "text-xs sm:text-sm", // Consistent text size for all items
+                "whitespace-nowrap relative" // Removed overflow-hidden to show full text
               )}
               onDoubleClick={() => onStartEdit(item.id)}
               onTouchEnd={(e) => {
@@ -79,8 +77,8 @@ const TimelineItem = ({
             </span>
           )}
           
-          {parseFloat(position.width) > 6 && !isEditing && (
-            <div className="ml-2 px-1.5 py-0.5 bg-blue-200/50 text-blue-700 text-[10px] font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+          {parseFloat(position.width) > 3 && !isEditing && (
+            <div className="ml-1 px-1 py-0.5 bg-blue-200/50 text-blue-700 text-[9px] sm:text-[10px] font-medium rounded-md opacity-80 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
               {Math.max(1, Math.ceil((new Date(item.end) - new Date(item.start)) / (1000 * 60 * 60 * 24)))}d
             </div>
           )}
