@@ -36,8 +36,6 @@ I'm particularly happy with a few aspects of this timeline component:
 
 **Performance Optimization**: I'd implement virtualization earlier for large datasets. While 16 items perform fine, I can see this struggling with hundreds of timeline items. React Window or React Virtualized would be essential for production use.
 
-**Accessibility**: I'd bake in accessibility from day one rather than as an afterthought. Screen reader support, keyboard navigation, and ARIA labels should be fundamental, not optional enhancements.
-
 ## Design Decisions and Inspiration
 
 **Visual Design**: I drew heavy inspiration from project management tools like Monday.com and Asana's timeline views. Their use of color coding, clean spacing, and hover interactions influenced my design direction.
@@ -122,4 +120,5 @@ Modern browsers supporting ES6+ features:
 - Firefox 88+
 - Safari 14+
 - Edge 90+
+
 
