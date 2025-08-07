@@ -14,10 +14,6 @@ const HomePage = ({ timelineItems }) => {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               Project Timeline Overview
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              Track your project milestones and deliverables in an intuitive timeline view. 
-              Manage tasks, deadlines, and team coordination all in one place.
-            </p>
           </div>
         </div>
 
